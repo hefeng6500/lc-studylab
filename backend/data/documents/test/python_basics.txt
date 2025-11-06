@@ -1,0 +1,111 @@
+Python 编程基础
+
+Python 是一种高级、解释型、通用的编程语言。它以简洁易读的语法而闻名，是初学者和专业开发者的理想选择。
+
+Python 的特点：
+
+1. 简单易学
+   - 清晰的语法
+   - 接近自然语言
+   - 缩进表示代码块
+
+2. 功能强大
+   - 丰富的标准库
+   - 大量第三方包
+   - 支持多种编程范式
+
+3. 跨平台
+   - Windows、macOS、Linux
+   - 一次编写，到处运行
+
+4. 开源免费
+   - 完全开源
+   - 活跃的社区
+   - 持续更新
+
+Python 的应用领域：
+
+- Web 开发：Django、Flask、FastAPI
+- 数据科学：NumPy、Pandas、Matplotlib
+- 机器学习：Scikit-learn、TensorFlow、PyTorch
+- 自动化：脚本、测试、运维
+- 游戏开发：Pygame
+- 桌面应用：Tkinter、PyQt
+
+基本语法：
+
+变量和数据类型：
+- 整数：x = 10
+- 浮点数：y = 3.14
+- 字符串：name = "Python"
+- 布尔值：is_true = True
+- 列表：numbers = [1, 2, 3, 4, 5]
+- 字典：person = {"name": "Alice", "age": 30}
+
+控制流：
+- if-elif-else：条件判断
+- for 循环：遍历序列
+- while 循环：条件循环
+- break 和 continue：控制循环
+
+函数：
+def greet(name):
+    return f"Hello, {name}!"
+
+类和对象：
+class Dog:
+    def __init__(self, name):
+        self.name = name
+    
+    def bark(self):
+        return f"{self.name} says Woof!"
+
+模块和包：
+- import：导入模块
+- from...import：导入特定内容
+- pip：包管理工具
+
+异常处理：
+try:
+    result = 10 / 0
+except ZeroDivisionError:
+    print("Cannot divide by zero!")
+finally:
+    print("Cleanup code")
+
+文件操作：
+with open("file.txt", "r") as f:
+    content = f.read()
+
+Python 最佳实践：
+
+1. 遵循 PEP 8 代码风格
+2. 使用有意义的变量名
+3. 编写文档字符串
+4. 使用虚拟环境
+5. 编写单元测试
+6. 使用版本控制（Git）
+
+常用标准库：
+
+- os：操作系统接口
+- sys：系统相关参数
+- datetime：日期和时间
+- json：JSON 编解码
+- re：正则表达式
+- collections：容器数据类型
+- itertools：迭代工具
+- functools：函数工具
+
+Python 学习资源：
+
+- 官方文档：python.org
+- 在线教程：Real Python、Python.org Tutorial
+- 书籍：《Python Crash Course》、《Fluent Python》
+- 视频课程：Coursera、Udemy
+- 练习平台：LeetCode、HackerRank
+
+总结：
+
+Python 是一门强大而灵活的编程语言，适合各种应用场景。无论你是初学者还是经验丰富的开发者，Python 都能帮助你高效地完成任务。通过不断学习和实践，你将能够掌握 Python 并用它构建出色的应用。
+
