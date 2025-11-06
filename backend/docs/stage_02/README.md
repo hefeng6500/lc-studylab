@@ -40,6 +40,7 @@ python scripts/rag_cli.py index create test_index data/documents/test --descript
 
 ```bash
 python scripts/rag_cli.py query test_index "什么是机器学习？"
+python scripts/rag_cli.py query test_index "长江赋中写的最好的一句是什么？"
 ```
 
 ### 5. 交互模式

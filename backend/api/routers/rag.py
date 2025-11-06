@@ -58,7 +58,7 @@ class IndexInfo(BaseModel):
     description: str
     created_at: str
     updated_at: str
-    num_documents: any
+    num_documents: int
     store_type: str = "faiss"
     embedding_model: str
 

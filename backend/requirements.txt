@@ -38,7 +38,7 @@ loguru==0.7.3
 langchain-text-splitters==1.0.0
 
 # 向量数据库
-faiss-cpu==1.9.0.post1          # FAISS 向量库（CPU 版本）
+faiss-cpu==1.12.0          # FAISS 向量库（CPU 版本）
 # faiss-gpu==1.9.0.post1        # FAISS GPU 版本（可选，需要 CUDA）
 
 # 文档加载器
