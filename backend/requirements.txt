@@ -6,6 +6,7 @@ langchain-community==0.4.1
 
 # LangGraph - 用于构建复杂工作流
 langgraph==1.0.2
+langgraph-checkpoint-sqlite==3.0.0  # SQLite 检查点支持
 
 # LangChain 集成包
 langchain-tavily==0.2.13  # Tavily 搜索工具（V1.0.0 推荐）

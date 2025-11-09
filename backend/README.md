@@ -1,14 +1,36 @@
-# LC-StudyLab Backend - 第 1 阶段
+# LC-StudyLab Backend
 
-## 🎯 第 1 阶段：基础 Agent + Streaming + 工具
+## 🎯 项目概述
 
-这是 LC-StudyLab 智能学习助手的第 1 阶段实现，包含：
+LC-StudyLab 是一个智能学习 & 研究助手系统，基于 **LangChain v1.0.3** 全家桶构建。
 
-- ✅ 基于 LangChain 1.0.3 的 `create_agent` 实现
-- ✅ 流式输出支持（Streaming）
-- ✅ 工具调用（时间、计算器、网络搜索）
-- ✅ FastAPI HTTP 接口
-- ✅ CLI 交互式演示工具
+### 已完成阶段
+
+#### ✅ 第 1 阶段：基础 Agent + Streaming + 工具
+- 基于 LangChain 1.0.3 的 `create_agent` 实现
+- 流式输出支持（Streaming）
+- 工具调用（时间、计算器、网络搜索）
+- FastAPI HTTP 接口
+- CLI 交互式演示工具
+
+#### ✅ 第 2 阶段：RAG 知识库模块
+- 文档加载和分割
+- 向量索引构建（FAISS）
+- 文档检索系统
+- RAG Agent 实现
+- RAG API 接口
+
+#### ✅ 第 3 阶段：LangGraph 自定义工作流
+- 有状态工作流管理（StateGraph）
+- 检查点持久化（SQLite）
+- 人机交互（Human-in-the-Loop）
+- 流式输出（SSE）
+- 智能学习工作流（规划→检索→出题→评分→反馈）
+
+### 进行中阶段
+
+#### ⏳ 第 4 阶段：DeepAgents 深度研究（计划中）
+#### ⏳ 第 5 阶段：Guardrails 安全（计划中）
 
 ## 🏗️ 技术栈
 
@@ -266,14 +288,32 @@ backend/
 └── README.md          # 本文档
 ```
 
+## 🎯 快速开始指南
+
+### 第 1 阶段：基础聊天
+详见 `docs/stage_01/` 目录
+
+### 第 2 阶段：RAG 文档问答
+详见 `docs/stage_02/` 目录
+
+### 第 3 阶段：学习工作流
+详见 `docs/stage_03/README.md` 完整使用指南
+
+**快速测试工作流：**
+```bash
+# 启动 API 服务器
+./start_server.sh
+
+# 或运行测试脚本
+./scripts/test_workflow.sh
+```
+
 ## 🎯 下一步计划
 
-第 1 阶段已完成！接下来的阶段：
+前 3 个阶段已完成！接下来：
 
-- **第 2 阶段**: RAG 知识库模块（向量库 + Retrievers + RAG Agent）
-- **第 3 阶段**: LangGraph 自定义工作流（Stateful + Checkpointer + HITL）
-- **第 4 阶段**: DeepAgents 深度研究模式
-- **第 5 阶段**: Guardrails / 安全与结构化输出
+- **第 4 阶段**: DeepAgents 深度研究模式（计划中）
+- **第 5 阶段**: Guardrails / 安全与结构化输出（计划中）
 
 ## 🤝 贡献
 

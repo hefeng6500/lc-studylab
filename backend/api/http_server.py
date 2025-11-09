@@ -25,7 +25,7 @@ from contextlib import asynccontextmanager
 import time
 
 from config import settings, setup_logging, get_logger
-from api.routers import chat, rag
+from api.routers import chat, rag, workflow
 
 # 初始化日志
 setup_logging()
@@ -170,6 +170,9 @@ app.include_router(chat.router)
 # 注册 RAG 路由
 app.include_router(rag.router)
 
+# 注册工作流路由（第 3 阶段）
+app.include_router(workflow.router)
+
 # 后续阶段会添加更多路由：
 # app.include_router(deep_research.router)
 
@@ -220,7 +223,8 @@ async def get_info():
             "streaming": True,
             "tools": True,
             "web_search": bool(settings.tavily_api_key),
-            "rag": False,  # 第 2 阶段
+            "rag": True,  # 第 2 阶段 ✅
+            "workflow": True,  # 第 3 阶段 ✅
             "deep_research": False,  # 第 4 阶段
         },
     }

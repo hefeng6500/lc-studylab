@@ -123,6 +123,12 @@ class Settings(BaseSettings):
         description="是否启用调试模式"
     )
     
+    # ==================== 数据目录配置 ====================
+    DATA_DIR: str = Field(
+        default="data",
+        description="数据存储根目录"
+    )
+    
     # ==================== Agent 配置 ====================
     agent_max_iterations: int = Field(
         default=15,
