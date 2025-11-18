@@ -1,0 +1,66 @@
+version: '3.8'
+
+services:
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: lc-studylab-backend
+    ports:
+      - "8000:8000"
+    environment:
+      # OpenAI 配置
+      - OPENAI_API_KEY=${OPENAI_API_KEY}
+      - OPENAI_API_BASE=${OPENAI_API_BASE:-https://api.openai.com/v1}
+      - OPENAI_MODEL=${OPENAI_MODEL:-gpt-4o}
+      # Tavily 搜索 API（可选）
+      - TAVILY_API_KEY=${TAVILY_API_KEY:-}
+      # 高德天气 API（可选）
+      - AMAP_KEY=${AMAP_KEY:-}
+      # 服务器配置
+      - SERVER_HOST=0.0.0.0
+      - SERVER_PORT=8000
+      - SERVER_RELOAD=false
+      # 日志配置
+      - LOG_LEVEL=${LOG_LEVEL:-INFO}
+      - LOG_FILE=logs/app.log
+      # 应用配置
+      - APP_NAME=LC-StudyLab
+      - APP_VERSION=0.1.0
+      - DEBUG=${DEBUG:-false}
+    volumes:
+      # 持久化数据目录
+      - ./backend/data:/app/data
+      - ./backend/logs:/app/logs
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD", "python", "-c", "import urllib.request; urllib.request.urlopen('http://localhost:8000/health')"]
+      interval: 30s
+      timeout: 10s
+      retries: 3
+      start_period: 40s
+    networks:
+      - lc-studylab-network
+
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: lc-studylab-frontend
+    ports:
+      - "3000:3000"
+    environment:
+      - NODE_ENV=production
+      # Docker 内部使用服务名，外部访问使用 localhost
+      - NEXT_PUBLIC_API_URL=${NEXT_PUBLIC_API_URL:-http://backend:8000}
+    depends_on:
+      backend:
+        condition: service_healthy
+    restart: unless-stopped
+    networks:
+      - lc-studylab-network
+
+networks:
+  lc-studylab-network:
+    driver: bridge
+

@@ -1,0 +1,57 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 日志
+logs/
+*.log
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# Git
+.git
+.gitignore
+
+# 文档
+*.md
+!README.md
+docs/
+
+# 测试
+test/
+tests/
+*.test.*
+*.spec.*
+
+# 数据文件（保留结构，但忽略内容）
+data/documents/*
+data/indexes/*
+data/research/*
+!data/documents/.gitkeep
+!data/indexes/.gitkeep
+!data/research/.gitkeep
+

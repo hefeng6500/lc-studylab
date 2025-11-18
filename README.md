@@ -165,13 +165,43 @@ lc-studylab/
 
 ## 快速开始
 
-### 环境要求
+### 方式一：Docker 一键部署（推荐）
+
+使用 Docker Compose 可以一键启动前后端服务：
+
+```bash
+# 1. 克隆项目
+git clone https://github.com/hefeng6500/lc-studylab.git
+cd lc-studylab
+
+# 2. 配置环境变量
+cp .env.example .env
+# 编辑 .env 文件，填写 OPENAI_API_KEY 等配置
+
+# 3. 一键启动
+docker-compose up -d
+
+# 4. 查看服务状态
+docker-compose ps
+```
+
+启动成功后访问：
+
+- 前端应用: http://localhost:3000
+- 后端 API: http://localhost:8000
+- API 文档: http://localhost:8000/docs
+
+详细说明请查看 [Docker 部署指南](./DOCKER.md)
+
+### 方式二：本地开发部署
+
+#### 环境要求
 
 - Python 3.10+
 - Node.js 18+
 - pnpm (推荐) 或 npm
 
-### 后端设置
+#### 后端设置
 
 1. **克隆项目**
 
@@ -352,6 +382,22 @@ curl -X POST "http://localhost:8000/workflow/start" \
     "thread_id": "test-123"
   }'
 ```
+
+## 部署方式
+
+### Docker 部署（推荐）
+
+使用 Docker Compose 一键部署，适合生产环境：
+
+```bash
+docker-compose up -d
+```
+
+详细说明请查看 [Docker 部署指南](./DOCKER.md)
+
+### 本地开发部署
+
+适合开发和调试，需要手动配置环境。
 
 ## 文档
 

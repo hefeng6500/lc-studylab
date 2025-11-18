@@ -1,0 +1,77 @@
+# Git
+.git
+.gitignore
+.gitattributes
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+venv/
+env/
+ENV/
+.venv
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Node
+node_modules/
+.next/
+out/
+.nuxt/
+.cache/
+dist/
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+.DS_Store
+
+# 环境变量
+.env
+.env.local
+.env.*.local
+
+# 日志
+logs/
+*.log
+
+# 数据文件（保留结构，但忽略内容）
+backend/data/documents/*
+backend/data/indexes/*
+backend/data/research/*
+!backend/data/documents/.gitkeep
+!backend/data/indexes/.gitkeep
+!backend/data/research/.gitkeep
+
+# 文档
+*.md
+!README.md
+docs/
+
+# 测试
+test/
+tests/
+*.test.*
+*.spec.*
+
+# 其他
+*.bak
+*.tmp
+.cache/
+
