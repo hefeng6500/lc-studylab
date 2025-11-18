@@ -7,6 +7,7 @@ LC-StudyLab 是一个智能学习 & 研究助手系统，基于 **LangChain v1.0
 ### 已完成阶段
 
 #### ✅ 第 1 阶段：基础 Agent + Streaming + 工具
+
 - 基于 LangChain 1.0.3 的 `create_agent` 实现
 - 流式输出支持（Streaming）
 - 工具调用（时间、计算器、网络搜索）
@@ -14,6 +15,7 @@ LC-StudyLab 是一个智能学习 & 研究助手系统，基于 **LangChain v1.0
 - CLI 交互式演示工具
 
 #### ✅ 第 2 阶段：RAG 知识库模块
+
 - 文档加载和分割
 - 向量索引构建（FAISS）
 - 文档检索系统
@@ -21,15 +23,17 @@ LC-StudyLab 是一个智能学习 & 研究助手系统，基于 **LangChain v1.0
 - RAG API 接口
 
 #### ✅ 第 3 阶段：LangGraph 自定义工作流
+
 - 有状态工作流管理（StateGraph）
 - 检查点持久化（SQLite）
 - 人机交互（Human-in-the-Loop）
 - 流式输出（SSE）
-- 智能学习工作流（规划→检索→出题→评分→反馈）
+- 智能学习工作流（规划 → 检索 → 出题 → 评分 → 反馈）
 
 ### 进行中阶段
 
 #### ⏳ 第 4 阶段：DeepAgents 深度研究（计划中）
+
 #### ⏳ 第 5 阶段：Guardrails 安全（计划中）
 
 ## 🏗️ 技术栈
@@ -51,7 +55,7 @@ cd backend
 python -m venv venv
 source venv/bin/activate  # Linux/Mac
 # 或
-venv\Scripts\activate  # Windows
+source venv/Scripts/activate  # Windows
 ```
 
 ### 2. 安装依赖
@@ -77,6 +81,7 @@ python scripts/demo_cli.py
 ```
 
 CLI 支持的命令：
+
 - `/help` - 显示帮助
 - `/mode <模式>` - 切换模式（default/coding/research/concise/detailed）
 - `/stream` - 切换流式/非流式输出
@@ -86,6 +91,7 @@ CLI 支持的命令：
 - `/quit` - 退出
 
 快速测试示例：
+
 ```
 👤 你: 现在几点？
 👤 你: 计算 123 + 456
@@ -97,7 +103,7 @@ CLI 支持的命令：
 启动服务器：
 
 ```bash
-python api/http_server.py
+bash start_server.py # 或者 python api/http_server.py
 ```
 
 或使用 uvicorn：
@@ -107,6 +113,7 @@ uvicorn api.http_server:app --reload --host 0.0.0.0 --port 8000
 ```
 
 访问 API 文档：
+
 - Swagger UI: http://localhost:8000/docs
 - ReDoc: http://localhost:8000/redoc
 
@@ -152,10 +159,12 @@ curl http://localhost:8000/health
 ### 1. 工具模块 (`core/tools/`)
 
 - **time_tools.py**: 时间相关工具
+
   - `get_current_time()` - 获取当前时间
   - `get_current_date()` - 获取当前日期
 
 - **calculator.py**: 计算器工具
+
   - `calculator(expression)` - 安全的数学表达式计算
 
 - **web_search.py**: 网络搜索工具
@@ -236,6 +245,7 @@ print(response)
 日志文件位置：`logs/app.log`
 
 日志级别可在 `.env` 中配置：
+
 ```env
 LOG_LEVEL=INFO  # DEBUG, INFO, WARNING, ERROR, CRITICAL
 ```
@@ -249,6 +259,7 @@ agent = create_base_agent(verbose=True)
 ```
 
 或在 `.env` 中设置：
+
 ```env
 DEBUG=true
 LOG_LEVEL=DEBUG
@@ -291,15 +302,19 @@ backend/
 ## 🎯 快速开始指南
 
 ### 第 1 阶段：基础聊天
+
 详见 `docs/stage_01/` 目录
 
 ### 第 2 阶段：RAG 文档问答
+
 详见 `docs/stage_02/` 目录
 
 ### 第 3 阶段：学习工作流
+
 详见 `docs/stage_03/README.md` 完整使用指南
 
 **快速测试工作流：**
+
 ```bash
 # 启动 API 服务器
 ./start_server.sh
@@ -322,4 +337,3 @@ backend/
 ## 📄 许可
 
 MIT License
-
