@@ -6,7 +6,12 @@
 import type { ToolUIPart } from "ai";
 
 // 后端模式类型
-export type AgentMode = 'basic-agent' | 'rag' | 'workflow' | 'deep-research' | 'guarded';
+export type AgentMode =
+  | "basic-agent"
+  | "rag"
+  | "workflow"
+  | "deep-research"
+  | "guarded";
 
 // 会话类型
 export interface Session {
@@ -78,7 +83,7 @@ export interface PlanStep {
   id: string;
   title: string;
   description?: string;
-  status: 'pending' | 'in_progress' | 'completed' | 'failed';
+  status: "pending" | "in_progress" | "completed" | "failed";
   order?: number;
 }
 
@@ -96,8 +101,8 @@ export interface QueueItem {
   id: string;
   title: string;
   description?: string;
-  status: 'pending' | 'completed';
-  type?: 'message' | 'todo' | 'file';
+  status: "pending" | "completed";
+  type?: "message" | "todo" | "file";
   parts?: any[]; // 如果是消息类型
 }
 
@@ -110,7 +115,7 @@ export interface ChainOfThoughtStep {
   id: string;
   label: string;
   description?: string;
-  status: 'complete' | 'active' | 'pending';
+  status: "complete" | "active" | "pending";
   icon?: string;
   searchResults?: any[];
   image?: {
@@ -147,14 +152,14 @@ export interface Checkpoint {
 export interface EnhancedMessage {
   // 基础字段
   id: string;
-  role: 'user' | 'assistant' | 'system';
+  role: "user" | "assistant" | "system";
   content: string;
   timestamp: Date;
-  
+
   // 分支管理
   versions?: MessageVersion[];
   currentVersionIndex?: number;
-  
+
   // AI Elements 组件数据
   chainOfThought?: ChainOfThought;
   reasoning?: Reasoning;
@@ -166,7 +171,7 @@ export interface EnhancedMessage {
   queue?: QueueItem[];
   contextUsage?: ContextUsage;
   checkpoints?: Checkpoint[];
-  
+
   // 元数据
   metadata?: Record<string, any>;
 }
@@ -174,36 +179,48 @@ export interface EnhancedMessage {
 // ===== 流式数据类型 =====
 
 // SSE 流式数据块
-export type StreamChunk = 
-  | { type: 'start'; message: string }
-  | { type: 'chunk'; content: string }
-  | { type: 'tool'; data: ToolCall }
-  | { type: 'tool_result'; data: ToolCall }
-  | { type: 'reasoning'; data: Reasoning }
-  | { type: 'source'; data: Source }
-  | { type: 'sources'; data: Source[] }
-  | { type: 'plan'; data: Plan }
-  | { type: 'task'; data: Task }
-  | { type: 'queue'; data: QueueItem[] }
-  | { type: 'context'; data: ContextUsage }
-  | { type: 'citation'; data: Citation }
-  | { type: 'chainOfThought'; data: ChainOfThought }
-  | { type: 'suggestions'; data: string[] }
-  | { type: 'end'; message: string }
-  | { type: 'error'; message: string; error: string };
+export type StreamChunk =
+  | { type: "start"; message: string }
+  | { type: "chunk"; content: string }
+  | { type: "tool"; data: ToolCall }
+  | { type: "tool_result"; data: ToolCall }
+  | { type: "reasoning"; data: Reasoning }
+  | { type: "source"; data: Source }
+  | { type: "sources"; data: Source[] }
+  | { type: "plan"; data: Plan }
+  | { type: "task"; data: Task }
+  | { type: "queue"; data: QueueItem[] }
+  | { type: "context"; data: ContextUsage }
+  | { type: "citation"; data: Citation }
+  | { type: "chainOfThought"; data: ChainOfThought }
+  | { type: "suggestions"; data: string[] }
+  | { type: "end"; message: string }
+  | { type: "error"; message: string; error: string };
 
 // API 请求
 export interface ChatRequest {
   message: string;
-  chat_history?: Array<{role: string; content: string}>;
+  chat_history?: Array<{ role: string; content: string }>;
   mode?: string;
   threadId?: string;
   sessionId?: string;
+  use_tools?: boolean;
   config?: {
     model?: string;
     temperature?: number;
     maxTokens?: number;
   };
+}
+
+// 消息元数据（用于 AI Elements 组件）
+export interface MessageMetadata {
+  sources?: Source[];
+  tools?: ToolCall[];
+  reasoning?: string;
+  plan?: PlanStep[];
+  task?: Task;
+  checkpoint?: Checkpoint;
+  chainOfThought?: string;
 }
 
 // API 响应
@@ -216,7 +233,7 @@ export interface ChatResponse {
 
 // 模型配置
 export interface ModelConfig {
-  provider: 'openai' | 'anthropic' | 'google' | 'deepseek';
+  provider: "openai" | "anthropic" | "google" | "deepseek";
   model: string;
   displayName: string;
   maxTokens: number;

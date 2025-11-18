@@ -2,7 +2,6 @@
 
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-import type { Element } from "hast";
 import { CheckIcon, CopyIcon } from "lucide-react";
 import {
   type ComponentProps,
@@ -14,6 +13,20 @@ import {
   useState,
 } from "react";
 import { type BundledLanguage, codeToHtml, type ShikiTransformer } from "shiki";
+
+// HAST Element 类型定义（替代 hast 包）
+// 注意：Shiki 内部使用 hast 类型，但我们定义兼容的结构以避免依赖不维护的包
+type HASTText = {
+  type: "text";
+  value: string;
+};
+
+type HASTElement = {
+  type: "element";
+  tagName: string;
+  properties: Record<string, unknown>;
+  children: Array<HASTElement | HASTText>;
+};
 
 type CodeBlockProps = HTMLAttributes<HTMLDivElement> & {
   code: string;
@@ -31,8 +44,10 @@ const CodeBlockContext = createContext<CodeBlockContextType>({
 
 const lineNumberTransformer: ShikiTransformer = {
   name: "line-numbers",
-  line(node: Element, line: number) {
-    node.children.unshift({
+  // 使用类型断言，因为我们的 HASTElement 结构与 Shiki 期望的 hast.Element 兼容
+  line(node, line: number) {
+    const element = node as unknown as HASTElement;
+    element.children.unshift({
       type: "element",
       tagName: "span",
       properties: {

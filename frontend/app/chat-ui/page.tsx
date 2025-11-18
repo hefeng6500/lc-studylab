@@ -7,9 +7,10 @@ import {
   PenSquare,
   Search,
   Library,
+  UserRound,
 } from "lucide-react";
 import { ChatEnhanced } from "@/components/chat/chat-enhanced";
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 
 export default function ChatUIPage() {
   const [selectedChat, setSelectedChat] = useState<string | null>(
@@ -57,7 +58,11 @@ export default function ChatUIPage() {
         {/* Top Section */}
         <div className="flex-shrink-0">
           {/* Header */}
-          <div className={`flex items-center ${sidebarOpen ? 'justify-between px-4' : 'justify-center'} py-3 group relative`}>
+          <div
+            className={`flex items-center ${
+              sidebarOpen ? "justify-between px-4" : "justify-center"
+            } py-3 group relative`}
+          >
             {sidebarOpen ? (
               <>
                 <div className="flex items-center gap-2">
@@ -77,7 +82,8 @@ export default function ChatUIPage() {
               <>
                 <Brain className="w-6 h-6 text-zinc-700 cursor-pointer" />
                 {/* Hover overlay with open button */}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-zinc-100/80 cursor-pointer"
+                <div
+                  className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-200 bg-zinc-100/80 cursor-pointer"
                   onClick={() => setSidebarOpen(true)}
                 >
                   <PanelLeft className="w-5 h-5 text-zinc-600" />
@@ -87,11 +93,13 @@ export default function ChatUIPage() {
           </div>
 
           {/* Menu Items */}
-          <div className={`${sidebarOpen ? 'px-3' : 'px-2'} py-2 space-y-1`}>
+          <div className={`${sidebarOpen ? "px-3" : "px-2"} py-2 space-y-1`}>
             {menuItems.map((item, index) => (
               <button
                 key={index}
-                className={`w-full flex items-center ${sidebarOpen ? 'gap-3 px-3' : 'justify-center'} h-10 rounded-md hover:bg-zinc-100 transition-colors group`}
+                className={`w-full flex items-center ${
+                  sidebarOpen ? "gap-3 px-3" : "justify-center"
+                } h-10 rounded-md hover:bg-zinc-100 transition-colors group`}
               >
                 <item.icon className="w-5 h-5 text-zinc-600 group-hover:scale-105 transition-transform" />
                 {sidebarOpen && (
@@ -128,11 +136,14 @@ export default function ChatUIPage() {
         )}
 
         {/* User Info */}
-        <div className={`flex-shrink-0 p-3 border-t border-zinc-200 flex items-center ${sidebarOpen ? 'gap-3' : 'justify-center'}`}>
+        <div
+          className={`flex-shrink-0 p-3 border-t border-zinc-200 flex items-center ${
+            sidebarOpen ? "gap-3" : "justify-center"
+          }`}
+        >
           <Avatar className="w-8 h-8">
-            <AvatarImage src="/placeholder-avatar.jpg" />
-            <AvatarFallback className="bg-zinc-300 text-zinc-700 text-xs">
-              FH
+            <AvatarFallback className="bg-zinc-300 text-zinc-700">
+              <UserRound className="w-4 h-4" />
             </AvatarFallback>
           </Avatar>
           {sidebarOpen && (
@@ -152,9 +163,7 @@ export default function ChatUIPage() {
         <div
           className="flex-shrink-0 h-[52px] flex items-center justify-center transition-shadow duration-200 bg-white"
           style={{
-            boxShadow: isScrolled
-              ? "0 1px 0 #0000000d"
-              : "0 1px 0 transparent",
+            boxShadow: isScrolled ? "0 1px 0 #0000000d" : "0 1px 0 transparent",
           }}
         >
           {/* Debug info */}
@@ -165,14 +174,13 @@ export default function ChatUIPage() {
 
         {/* Scrollable Content Area */}
         <div className="flex-1 overflow-hidden flex justify-center">
-          <ChatEnhanced 
+          <ChatEnhanced
             mode="default"
             useTools={true}
-            onScrollChange={handleScrollChange} 
+            onScrollChange={handleScrollChange}
           />
         </div>
       </main>
     </div>
   );
 }
-

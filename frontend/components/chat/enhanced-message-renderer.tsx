@@ -244,7 +244,11 @@ export function EnhancedMessageRenderer({
           <div className="space-y-2">
             {message.tools.map((tool) => (
               <Tool key={tool.id}>
-                <ToolHeader title={tool.name} type={tool.type} state={tool.state} />
+                <ToolHeader 
+                  title={tool.name} 
+                  type={tool.type as `tool-${string}`} 
+                  state={tool.state} 
+                />
                 <ToolContent>
                   <ToolInput input={tool.parameters} />
                   {(tool.result || tool.error) && (
@@ -278,19 +282,17 @@ export function EnhancedMessageRenderer({
 
         {/* 8. Main Content (主要内容) */}
         <MessageContent>
-          <MessageResponse>
-            {(() => {
-              const displayContent = getDisplayContent(message);
-              const hasContent = Boolean(displayContent.trim());
-              if (!hasContent && isStreaming) {
-                return <Shimmer>正在思考...</Shimmer>;
-              }
-              if (!hasContent) {
-                return null;
-              }
-              return displayContent;
-            })()}
-          </MessageResponse>
+          {(() => {
+            const displayContent = getDisplayContent(message);
+            const hasContent = Boolean(displayContent.trim());
+            if (!hasContent && isStreaming) {
+              return <Shimmer>正在思考...</Shimmer>;
+            }
+            if (!hasContent) {
+              return null;
+            }
+            return <MessageResponse>{displayContent}</MessageResponse>;
+          })()}
         </MessageContent>
 
         {/* 9. Context Usage (上下文使用) */}

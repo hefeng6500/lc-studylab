@@ -3,9 +3,24 @@
 import { useState } from "react"
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import { ScrollArea } from "@/components/ui/scroll-area"
-import { Sources } from "@/components/ai-elements/sources"
-import { Reasoning } from "@/components/ai-elements/reasoning"
-import { Tool } from "@/components/ai-elements/tool"
+import { 
+  Sources, 
+  SourcesTrigger, 
+  SourcesContent, 
+  Source 
+} from "@/components/ai-elements/sources"
+import { 
+  Reasoning, 
+  ReasoningTrigger, 
+  ReasoningContent 
+} from "@/components/ai-elements/reasoning"
+import { 
+  Tool, 
+  ToolHeader, 
+  ToolContent, 
+  ToolInput, 
+  ToolOutput 
+} from "@/components/ai-elements/tool"
 import { MessageMetadata } from "@/lib/types"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
@@ -54,7 +69,24 @@ export function ChatRightPanel({ metadata, rawJson }: ChatRightPanelProps) {
         <ScrollArea className="flex-1">
           <TabsContent value="sources" className="p-4 space-y-4">
             {hasSources ? (
-              <Sources sources={metadata.sources!} />
+              <Sources>
+                <SourcesTrigger count={metadata.sources!.length} />
+                <SourcesContent>
+                  {metadata.sources!.map((source, idx) => (
+                    <Source 
+                      key={idx} 
+                      href={source.href || "#"} 
+                      title={source.title || `来源 ${idx + 1}`}
+                    >
+                      {source.content && (
+                        <span className="block text-xs text-muted-foreground mt-1">
+                          {source.content}
+                        </span>
+                      )}
+                    </Source>
+                  ))}
+                </SourcesContent>
+              </Sources>
             ) : (
               <EmptyState message="暂无来源信息" />
             )}
@@ -63,7 +95,22 @@ export function ChatRightPanel({ metadata, rawJson }: ChatRightPanelProps) {
           <TabsContent value="tools" className="p-4 space-y-4">
             {hasTools ? (
               metadata.tools!.map((tool) => (
-                <Tool key={tool.id} {...tool} />
+                <Tool key={tool.id}>
+                  <ToolHeader 
+                    title={tool.name} 
+                    type={tool.type as `tool-${string}`} 
+                    state={tool.state} 
+                  />
+                  <ToolContent>
+                    <ToolInput input={tool.parameters} />
+                    {(tool.result || tool.error) && (
+                      <ToolOutput 
+                        output={tool.result} 
+                        errorText={tool.error} 
+                      />
+                    )}
+                  </ToolContent>
+                </Tool>
               ))
             ) : (
               <EmptyState message="暂无工具调用" />
@@ -73,7 +120,14 @@ export function ChatRightPanel({ metadata, rawJson }: ChatRightPanelProps) {
           <TabsContent value="reasoning" className="p-4 space-y-4">
             {hasReasoning || hasChainOfThought ? (
               <>
-                {hasReasoning && <Reasoning reasoning={metadata.reasoning!} />}
+                {hasReasoning && (
+                  <Reasoning>
+                    <ReasoningTrigger />
+                    <ReasoningContent>
+                      {metadata.reasoning!}
+                    </ReasoningContent>
+                  </Reasoning>
+                )}
                 {hasChainOfThought && (
                   <Card>
                     <CardHeader>

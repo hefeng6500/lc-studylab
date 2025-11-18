@@ -35,17 +35,17 @@ async function request<T>(
 /**
  * 聊天 API - 非流式
  */
-export async function chat(request: ChatRequest): Promise<ChatResponse> {
+export async function chat(chatRequest: ChatRequest): Promise<ChatResponse> {
   return request<ChatResponse>('/chat', {
     method: 'POST',
-    body: JSON.stringify(request),
+    body: JSON.stringify(chatRequest),
   });
 }
 
 /**
  * 聊天 API - 流式（返回 ReadableStream）
  */
-export async function chatStream(request: ChatRequest): Promise<Response> {
+export async function chatStream(chatRequest: ChatRequest): Promise<Response> {
   const url = `${API_BASE_URL}/chat`;
   
   const response = await fetch(url, {
@@ -54,7 +54,7 @@ export async function chatStream(request: ChatRequest): Promise<Response> {
       'Content-Type': 'application/json',
     },
     body: JSON.stringify({
-      ...request,
+      ...chatRequest,
       stream: true,
     }),
   });
