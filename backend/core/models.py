@@ -78,6 +78,25 @@ def get_chat_model(
     # 合并额外的参数
     model_config.update(kwargs)
     
+    # 验证模型名称（可选，提供常见模型列表）
+    # 注意：如果 model_name 包含 "openai:" 前缀，需要先提取模型名
+    actual_model_name = model_name
+    if ":" in model_name:
+        actual_model_name = model_name.split(":")[-1]
+    
+    # 已知的 OpenAI 模型列表（包括自定义/代理服务器支持的模型）
+    known_models = [
+        "gpt-5", "gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "gpt-4", 
+        "gpt-3.5-turbo", "gpt-3.5-turbo-16k"
+    ]
+    
+    # 只记录信息，不阻止使用未知模型（因为代理服务器可能支持自定义模型）
+    if actual_model_name not in known_models:
+        logger.debug(
+            f"📝 使用自定义模型: '{actual_model_name}' "
+            f"(不在已知模型列表中，但允许使用)"
+        )
+    
     logger.info(
         f"🤖 创建聊天模型: {model_name} "
         f"(temperature={temperature}, streaming={streaming})"
@@ -91,6 +110,9 @@ def get_chat_model(
         return model
     except Exception as e:
         logger.error(f"❌ 模型创建失败: {e}")
+        logger.error(f"   请检查模型名称 '{model_name}' 是否正确")
+        # 注意：如果使用代理服务器，可能支持自定义模型名称
+        logger.error(f"   如果使用代理服务器，请确保模型名称与服务器支持的模型匹配")
         raise
 
 
@@ -256,6 +278,20 @@ def get_model_string(
         https://reference.langchain.com/python/langchain/models/
     """
     model_name = model_name or settings.openai_model
+    
+    # 验证模型名称（仅对 OpenAI 模型）
+    # 注意：允许自定义模型名称，因为代理服务器可能支持额外的模型
+    if provider == "openai":
+        known_models = [
+            "gpt-5", "gpt-4o", "gpt-4o-mini", "gpt-4-turbo", "gpt-4", 
+            "gpt-3.5-turbo", "gpt-3.5-turbo-16k"
+        ]
+        if model_name not in known_models:
+            logger.debug(
+                f"📝 使用自定义模型: '{model_name}' "
+                f"(不在已知模型列表中，但允许使用，适用于代理服务器)"
+            )
+    
     model_string = f"{provider}:{model_name}"
     
     logger.debug(f"🔤 生成模型标识符: {model_string}")

@@ -28,8 +28,8 @@ class Settings(BaseSettings):
     )
     
     openai_model: str = Field(
-        default="gpt-4o",
-        description="默认使用的 OpenAI 模型"
+        default="gpt-5",
+        description="默认使用的 OpenAI 模型（支持：gpt-4o, gpt-4o-mini, gpt-4-turbo, gpt-3.5-turbo）"
     )
     
     openai_temperature: float = Field(
@@ -231,6 +231,51 @@ class Settings(BaseSettings):
     data_uploads_path: str = Field(
         default="data/uploads",
         description="上传文件存储路径"
+    )
+    
+    # ==================== Advanced RAG 配置 ====================
+    # Query Enhancement 配置
+    query_enhancement_enabled: bool = Field(
+        default=True,
+        description="是否启用查询增强"
+    )
+    
+    multi_query_num_queries: int = Field(
+        default=3,
+        ge=2,
+        le=10,
+        description="Multi-Query 生成的查询数量"
+    )
+    
+    hyde_enabled: bool = Field(
+        default=False,
+        description="是否启用 HyDE"
+    )
+    
+    # Hybrid Retrieval 配置
+    hybrid_retrieval_enabled: bool = Field(
+        default=True,
+        description="是否启用混合检索"
+    )
+    
+    bm25_weight: float = Field(
+        default=0.4,
+        ge=0.0,
+        le=1.0,
+        description="BM25 检索权重"
+    )
+    
+    vector_weight: float = Field(
+        default=0.6,
+        ge=0.0,
+        le=1.0,
+        description="向量检索权重"
+    )
+    
+    rrf_k: int = Field(
+        default=60,
+        ge=1,
+        description="RRF 常数 k"
     )
     
     # Pydantic Settings 配置
