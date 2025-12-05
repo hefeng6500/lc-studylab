@@ -175,7 +175,9 @@ git clone https://github.com/hefeng6500/lc-studylab.git
 cd lc-studylab
 
 # 2. 配置环境变量
-cp .env.example .env
+cd backend
+cp env.example .env
+cd ..
 # 编辑 .env 文件，填写 OPENAI_API_KEY 等配置
 
 # 3. 一键启动
